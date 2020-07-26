@@ -3,19 +3,35 @@
 
 using namespace std;
 
-bool OneAwayHelper(string &str1, string &str2, int i, int j, int diff){
-  if(diff > 1) return false;
-  if(( i >= str1.size() && j < str2.size()) || ( j >= str2.size() && i < str1.size())) return false;
-  if(diff <=1 && i == str1.size() && j == str2.size()) return true;
-
-  if(str1[i] == str2[j]) return OneAwayHelper(str1, str2, ++i, ++j, diff);
-  return OneAwayHelper(str1, str2, ++i, j, ++diff) ||
-         OneAwayHelper(str1, str2, ++i, ++j, ++diff) ||
-         OneAwayHelper(str1, str2, i, ++j, ++diff);
-}
-
 bool OneAway(string &str1, string &str2){
-  return OneAwayHelper(str1, str2, 0, 0, 0);
+  int len1 = str1.size();
+  int len2 = str2.size();
+  int replace = 0, insert = 0;
+  int i = 0, j = 0;
+  while(i < len1 && j < len2){
+    if(str1[i] == str2[j]){
+      ++i, ++j;
+      continue;
+    }
+    if(len1 == len2){
+      ++i, ++j;
+      ++replace;
+    } else {
+      ++insert;
+      if(len1 > len2){
+        ++i;
+      }else{
+        ++j;
+      }
+    }
+  }
+  if(i < len1 && j == len2){
+    while(i++ < len1) ++insert;
+  }
+  if(j < len2 && i == len1){
+    while(j++ < len2) ++insert;
+  }
+  return (replace + insert <= 1);
 }
 
 int main(int argc, char **argv){

@@ -17,5 +17,6 @@ public:
   void AddNode(int);
   void RemoveDups();
   void Print();
-  int KthToLast();
+  int KthToLast(int);
+  void BuildFromArgs(int, char **);
 };

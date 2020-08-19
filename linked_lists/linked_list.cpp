@@ -24,6 +24,13 @@ void LinkedList::Print(){
   cout << "\n";
 }
 
+void LinkedList::BuildFromArgs(int count, char **args){
+  int i = count;
+  while(--i >= 1){
+    this->AddNode( atoi(args[i]) );
+  }
+}
+
 void LinkedList::RemoveDups(){
   unordered_map<int, bool> visitedMap;
   Node *previous = NULL;
@@ -39,4 +46,19 @@ void LinkedList::RemoveDups(){
       currentNode = previous->next;
     }
   }
+}
+
+int LinkedList::KthToLast(int k){
+  Node *reference = m_head;
+  Node *required = m_head;
+  int count = k;
+  while(count-- && reference){
+    reference = reference->next;
+  }
+  if(!reference) return NULL;
+  while(reference){
+    reference = reference->next;
+    required = required->next;
+  }
+  return required->data;
 }

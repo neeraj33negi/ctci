@@ -2,8 +2,8 @@
 
 LinkedList *BuildListFromArgs(int count, char **args){
   LinkedList *list = new LinkedList();
-  int i = 0;
-  while(++i < count){
+  int i = count;
+  while(--i >= 1){
     list->AddNode( atoi(args[i]) );
   }
   return list;
@@ -12,6 +12,8 @@ LinkedList *BuildListFromArgs(int count, char **args){
 
 int main(int argc, char **argv){
   LinkedList *list = BuildListFromArgs(argc, argv);
+  list->Print();
+  list->RemoveDups();
   list->Print();
   return 0;
 }

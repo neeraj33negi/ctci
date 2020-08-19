@@ -23,3 +23,20 @@ void LinkedList::Print(){
   }
   cout << "\n";
 }
+
+void LinkedList::RemoveDups(){
+  unordered_map<int, bool> visitedMap;
+  Node *previous = NULL;
+  Node *currentNode = m_head;
+  while(currentNode){
+    if(visitedMap.find(currentNode->data) == visitedMap.end()){
+      visitedMap[currentNode->data] = true;
+      previous = currentNode;
+      currentNode = currentNode->next;
+    } else {
+      previous->next = currentNode->next;
+      delete(currentNode);
+      currentNode = previous->next;
+    }
+  }
+}

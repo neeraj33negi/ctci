@@ -55,10 +55,23 @@ int LinkedList::KthToLast(int k){
   while(count-- && reference){
     reference = reference->next;
   }
-  if(!reference) return NULL;
+  if(!reference) return -1;
   while(reference){
     reference = reference->next;
     required = required->next;
   }
   return required->data;
+}
+
+// assuming k is node from the first to delete
+void LinkedList::DeleteMiddleNode(int k){
+  Node *current = m_head;
+  while(--k && current){
+    current = current->next;
+  }
+  if(!current || !current->next || current == m_head) return;
+  Node *toDelete = current->next;
+  current->data = toDelete->data;
+  current->next = toDelete->next;
+  delete(toDelete);
 }

@@ -19,4 +19,5 @@ public:
   void Print();
   int KthToLast(int);
   void BuildFromArgs(int, char **);
+  void DeleteMiddleNode(int);
 };

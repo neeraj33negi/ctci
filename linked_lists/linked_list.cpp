@@ -75,3 +75,21 @@ void LinkedList::DeleteMiddleNode(int k){
   current->next = toDelete->next;
   delete(toDelete);
 }
+
+void LinkedList::Partition(int pivot){
+  Node *first = new Node(-1), *second = new Node(-1), *current = m_head;
+  Node *refFirst = first, *refSecond = second;
+  while(current){
+    if(current->data < pivot){
+      first->next = current;
+      first = current;
+    }else{
+      second->next = current;
+      second = current;
+    }
+    current = current->next;
+  }
+  second->next = NULL;
+  first->next = refSecond->next;
+  m_head = refFirst->next;
+}

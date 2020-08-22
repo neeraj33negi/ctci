@@ -93,3 +93,66 @@ void LinkedList::Partition(int pivot){
   first->next = refSecond->next;
   m_head = refFirst->next;
 }
+
+LinkedList *LinkedList::Add(LinkedList *list2){
+  LinkedList *newList = new LinkedList();
+  Node *newListHead = NULL, *ptr1 = this->m_head, *ptr2 = list2->m_head, *previous = NULL;
+  int rem = 0, currentSum;
+  while(ptr1 && ptr2){
+    currentSum = ptr1->data + ptr2->data + rem;
+    if(currentSum >= 10){
+      rem = 1;
+      currentSum %= 10;
+    }else{
+      rem = 0;
+    }
+    Node *newNode = new Node(currentSum);
+    if(previous){
+      previous->next = newNode;
+    }else{
+      newListHead = newNode;
+    }
+    previous = newNode;
+    ptr1 = ptr1->next;
+    ptr2 = ptr2->next;
+  }
+  while(ptr1){
+    currentSum = ptr1->data + rem;
+    if(currentSum >= 10){
+      rem = 1;
+      currentSum %= 10;
+    }else{
+      rem = 0;
+    }
+    Node *newNode = new Node(currentSum);
+    if(previous){
+      previous->next = newNode;
+    }else{
+      newListHead = newNode;
+    }
+    previous = newNode;
+    ptr1 = ptr1->next;
+  }
+
+  while(ptr2){
+    currentSum = ptr2->data + rem;
+    if(currentSum >= 10){
+      rem = 1;
+      currentSum %= 10;
+    }else{
+      rem = 0;
+    }
+    Node *newNode = new Node(currentSum);
+    if(previous){
+      previous->next = newNode;
+    }else{
+      newListHead = newNode;
+    }
+    previous = newNode;
+    ptr2 = ptr2->next;
+  }
+
+  if(rem) previous->next = new Node(1);
+  newList->m_head = newListHead;
+  return newList;
+}

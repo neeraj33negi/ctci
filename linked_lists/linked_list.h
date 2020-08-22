@@ -21,4 +21,5 @@ public:
   void BuildFromArgs(int, char **);
   void DeleteMiddleNode(int);
   void Partition(int);
+  LinkedList *Add(LinkedList *);
 };

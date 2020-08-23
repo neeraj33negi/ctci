@@ -9,6 +9,10 @@ LinkedList::LinkedList(){
   m_head = NULL;
 }
 
+LinkedList::LinkedList(LinkedList *list){
+  this->m_head = list->m_head;
+}
+
 void LinkedList::AddNode(int data){
   Node *newNode = new Node(data);
   newNode->next = m_head;
@@ -155,4 +159,60 @@ LinkedList *LinkedList::Add(LinkedList *list2){
   if(rem) previous->next = new Node(1);
   newList->m_head = newListHead;
   return newList;
+}
+
+// Linear space and time
+bool LinkedList::IsPalindrome(){
+  int size = 0;
+  Node *first = this->m_head, *second = this->m_head;
+  stack<Node *> ptrs;
+  while(second && second->next){
+    ptrs.push(first);
+    first = first->next;
+    second = second->next->next;
+  }
+  if(second){
+    second = first->next;
+  }else{
+    second = first;
+  }
+  while(second){
+    if(second->data == ptrs.top()->data){
+      second = second->next;
+      ptrs.pop();
+    }else{
+      return false;
+    }
+  }
+  return true;
+}
+
+Node *LinkedList::Intersection(LinkedList *list2){
+  Node *first = this->m_head, *second = list2->m_head;
+  int len1 = 0, len2 = 0;
+  while(first){
+    len1++;
+    first = first->next;
+  }
+  while(second){
+    len2++;
+    second = second->next;
+  }
+  first = this->m_head, second = list2->m_head;
+  if(len1 > len2){
+    int i = len1 - len2;
+    while(i--){
+      first = first->next;
+    }
+  }else{
+    int i = len2 - len1;
+    while(i--){
+      second = second->next;
+    }
+  }
+  while(first != second){
+    first = first->next;
+    second = second->next;
+  }
+  return first;
 }

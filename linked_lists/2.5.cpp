@@ -3,7 +3,7 @@
 int main(int argc, char **argv){
   LinkedList *list1 = new LinkedList();
   LinkedList *list2 = new LinkedList();
-  list1->AddNode(5);
+  list1->AddNode(5n);
   // list1->AddNode(1);
   // list1->AddNode(7);
   // list1->AddNode(7);

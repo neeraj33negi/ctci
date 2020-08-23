@@ -1,5 +1,7 @@
 #include <iostream>
 #include <unordered_map>
+#include <stack>
+
 using namespace std;
 
 class Node{
@@ -10,10 +12,10 @@ public:
 };
 
 class LinkedList{
-private:
-  Node *m_head;
 public:
+  Node *m_head;
   LinkedList();
+  LinkedList(LinkedList *);
   void AddNode(int);
   void RemoveDups();
   void Print();
@@ -22,4 +24,6 @@ public:
   void DeleteMiddleNode(int);
   void Partition(int);
   LinkedList *Add(LinkedList *);
+  bool IsPalindrome();
+  Node *Intersection(LinkedList *);
 };

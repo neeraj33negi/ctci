@@ -26,4 +26,6 @@ public:
   LinkedList *Add(LinkedList *);
   bool IsPalindrome();
   Node *Intersection(LinkedList *);
+  Node *DetectLoop();
+  Node *LastNode();
 };

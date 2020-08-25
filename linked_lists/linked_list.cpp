@@ -35,6 +35,16 @@ void LinkedList::BuildFromArgs(int count, char **args){
   }
 }
 
+Node *LinkedList::LastNode(){
+  if(!m_head) return m_head;
+
+  Node *temp = this->m_head;
+  while(temp->next){
+    temp = temp->next;
+  }
+  return temp;
+}
+
 void LinkedList::RemoveDups(){
   unordered_map<int, bool> visitedMap;
   Node *previous = NULL;
@@ -215,4 +225,20 @@ Node *LinkedList::Intersection(LinkedList *list2){
     second = second->next;
   }
   return first;
+}
+
+Node *LinkedList::DetectLoop(){
+  if(!this->m_head) return nullptr;
+
+  Node *fast = this->m_head, *slow = this->m_head;
+  do{
+    fast = fast->next->next;
+    slow = slow->next;
+  }while(fast != slow);
+  slow = this->m_head;
+  while(fast != slow){
+    fast = fast->next;
+    slow = slow->next;
+  }
+  return fast;
 }

@@ -31,4 +31,6 @@ public:
   Node *LastNode();
   LinkedList *Merge(LinkedList *);
   void SwapPairs();
+  void RotateList(int);
 };
+

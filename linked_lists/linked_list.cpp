@@ -320,3 +320,25 @@ void LinkedList::SwapPairs(){
     }
   }
 }
+
+void LinkedList::RotateList(int k){
+  if( !k || !this->m_head ) return;
+  Node *ptr = this->m_head, *newHead = m_head;
+  int size = 0;
+  while(ptr){
+    size++;
+    ptr = ptr->next;
+  }
+  k = k % size;
+  ptr = m_head;
+  while(k--){
+    ptr = ptr->next;
+  }
+  while(ptr->next){
+    ptr = ptr->next;
+    newHead = newHead->next;
+  }
+  ptr->next = m_head;
+  m_head = newHead->next;
+  newHead->next = nullptr;
+}

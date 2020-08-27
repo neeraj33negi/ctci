@@ -17,6 +17,7 @@ public:
   LinkedList();
   LinkedList(LinkedList *);
   void AddNode(int);
+  void AddNodeLast(int);
   void RemoveDups();
   void Print();
   int KthToLast(int);
@@ -28,4 +29,6 @@ public:
   Node *Intersection(LinkedList *);
   Node *DetectLoop();
   Node *LastNode();
+  LinkedList *Merge(LinkedList *);
+  void SwapPairs();
 };

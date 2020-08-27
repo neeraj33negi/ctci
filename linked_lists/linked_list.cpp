@@ -19,6 +19,19 @@ void LinkedList::AddNode(int data){
   m_head = newNode;
 }
 
+void LinkedList::AddNodeLast(int data){
+  Node *ptr = this->m_head;
+  Node *newNode = new Node(data);
+  if(ptr == nullptr){
+    m_head = newNode;
+  }else{
+    while(ptr->next){
+      ptr = ptr->next;
+    }
+    ptr->next = newNode;
+  }
+}
+
 void LinkedList::Print(){
   Node *temp = m_head;
   while(temp){
@@ -241,4 +254,69 @@ Node *LinkedList::DetectLoop(){
     slow = slow->next;
   }
   return fast;
+}
+
+LinkedList *LinkedList::Merge(LinkedList *list2){
+  LinkedList *mergedList = new LinkedList();
+  Node *ptr = nullptr, *head = nullptr;
+  Node *first = this->m_head, *second = list2->m_head;
+  int data;
+  while(first && second){
+    if(first->data <= second->data){
+      data = first->data;
+      first = first->next;
+    }else{
+      data = second->data;
+      second = second->next;
+    }
+    Node *newNode = new Node(data);
+    if(ptr == nullptr){
+      ptr = newNode;
+      head = ptr;
+    }else{
+      ptr->next = newNode;
+      ptr = ptr->next;
+    }
+  }
+
+  Node *remaining;
+  if(first){
+    remaining = first;
+  }else{
+    remaining = second;
+  }
+  while(remaining){
+    Node *newNode = new Node(remaining->data);
+    if(ptr == nullptr){
+      ptr = newNode;
+      head = ptr;
+    }else{
+      ptr->next = newNode;
+      ptr = ptr->next;
+    }
+    remaining = remaining->next;
+  }
+  mergedList->m_head = head;
+  return mergedList;
+}
+
+void LinkedList::SwapPairs(){
+  Node *first = this->m_head;
+  if(first == nullptr || first->next == nullptr) return;
+
+  Node *second = first->next, *temp, *prev = nullptr;
+  m_head = second;
+  while(first && second){
+    temp = second->next;
+    second->next = first;
+    first->next = temp;
+    if(prev)  prev->next = second;
+    prev = first;
+    first = temp;
+    if(first){
+      second = first->next;
+    }else{
+      break;
+    }
+  }
 }

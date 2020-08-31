@@ -342,3 +342,59 @@ void LinkedList::RotateList(int k){
   m_head = newHead->next;
   newHead->next = nullptr;
 }
+
+void LinkedList::ReverseKGroup(int k){
+  Node *itr = this->m_head;
+  if(!itr || !k || k == 1) return;
+
+  int n = k, count = 0;
+  while(itr){
+    count++;
+    itr = itr->next;
+  }
+  count /= k;
+  bool first = true;
+  Node *prev = nullptr, *current = this->m_head, *next;
+  Node *lastGroupTail = nullptr, *thisGroupHead = nullptr, *thisGroupTail = nullptr;
+  while(count--){
+    thisGroupTail = current;
+    while(n--){
+      next = current->next;
+      current->next = prev;
+      prev = current;
+      current = next;
+    }
+    thisGroupHead = prev;
+    if(lastGroupTail) lastGroupTail->next = thisGroupHead;
+    lastGroupTail = thisGroupTail;
+    n = k;
+    if(first){
+      this->m_head = thisGroupHead;
+    }
+    first = false;
+  }
+  if(n){
+    lastGroupTail->next = current;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

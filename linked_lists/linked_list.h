@@ -32,5 +32,6 @@ public:
   LinkedList *Merge(LinkedList *);
   void SwapPairs();
   void RotateList(int);
+  void ReverseKGroup(int);
 };
 
